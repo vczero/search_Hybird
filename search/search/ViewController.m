@@ -34,7 +34,10 @@
     NSURLRequest *urlReq = [[NSURLRequest alloc]initWithURL:url];
     [_wb loadRequest:urlReq];
     
+
+    
     _wb.delegate = self;
+
     [self.view addSubview:_wb];
 }
 
@@ -63,6 +66,8 @@
     if([location rangeOfString:@"douban.com"].location != NSNotFound){
         UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(selectLeftAction:)];
         self.navigationItem.leftBarButtonItem = leftButton;
+    }else{
+        self.navigationItem.leftBarButtonItem = nil;
     }
 }
 
