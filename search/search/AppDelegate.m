@@ -7,10 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "ViewController.h"
 
 @interface AppDelegate (){
-    UIWebView               * _wb;
-    UIActivityIndicatorView *_act;
+
 }
 
 @end
@@ -29,20 +29,9 @@
     self.window.frame = CGRectMake(0, 0, width, height);
     self.window.backgroundColor = [UIColor whiteColor];
     
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:[[ViewController alloc]init]];
+    self.window.rootViewController = nav;
     
-    if(!_wb){
-        _wb = [[UIWebView alloc]init];
-    }
-    
-    _wb.frame = CGRectMake(0, 20, width, height);
-    NSString *path = [NSString stringWithFormat:@"http://vczero.github.io/search/html/index.html"];
-    NSURL *url = [[NSURL alloc]initWithString:path];
-    NSURLRequest *urlReq = [[NSURLRequest alloc]initWithURL:url];
-    [_wb loadRequest:urlReq];
-    
-    _wb.delegate = self;
-    
-    [self.window addSubview:_wb];
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -69,22 +58,6 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-- (void)webViewDidStartLoad:(UIWebView *)webView{
-    if(!_act){
-        _act = [[UIActivityIndicatorView alloc]init];
-        _act.color = [UIColor blueColor];
-        _act.center = self.window.center;
-        [self.window addSubview:_act];
-    }
-    if(_act.isAnimating){
-        return;
-    }
-    
-    [_act startAnimating];
-}
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView{
-    [_act stopAnimating];
-}
 
 @end
